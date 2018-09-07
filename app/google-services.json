@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "790559733995",
+    "firebase_url": "https://incipio-1ff06.firebaseio.com",
+    "project_id": "incipio-1ff06",
+    "storage_bucket": "incipio-1ff06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790559733995:android:510ee1ff079920d7",
+        "android_client_info": {
+          "package_name": "com.wordpress.qubiplatform.incipio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790559733995-ids6clqef3tbeign9fi0aspnt887c7p5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wordpress.qubiplatform.incipio",
+            "certificate_hash": "761dc71b5a0949e20793d404d8321aa04ce50f16"
+          }
+        },
+        {
+          "client_id": "790559733995-l67kth46kq2fsbjdo0lulela595n6pbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOBcm9BDX7wAukFR7JJEXNCnJikFWgMH0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790559733995-l67kth46kq2fsbjdo0lulela595n6pbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
