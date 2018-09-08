@@ -20,11 +20,14 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_message:
+                    mTextMessage.setText(R.string.title_message);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_standings:
+                    mTextMessage.setText(R.string.title_standings);
+                    return true;
+                case R.id.navigation_profile:
+                    mTextMessage.setText(R.string.title_profile);
                     return true;
             }
             return false;
@@ -39,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.navigation_home);
     }
 
 }

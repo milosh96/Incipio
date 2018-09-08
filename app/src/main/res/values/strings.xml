@@ -14,7 +14,8 @@
         completions."
     </string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Početna</string>
+    <string name="title_standings">Tabela</string>
+    <string name="title_message">Poruke</string>
+    <string name="title_profile">Profil</string>
 </resources>
