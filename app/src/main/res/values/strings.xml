@@ -13,7 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Incipio</string>
     <string name="title_home">Početna</string>
     <string name="title_standings">Tabela</string>
     <string name="title_message">Poruke</string>
