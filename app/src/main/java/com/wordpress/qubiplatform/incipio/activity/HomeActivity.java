@@ -1,16 +1,22 @@
-package com.wordpress.qubiplatform.incipio;
+package com.wordpress.qubiplatform.incipio.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.wordpress.qubiplatform.incipio.R;
+
 public class HomeActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+
+    private RecyclerView myRecyclerView;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,11 +57,14 @@ public class HomeActivity extends AppCompatActivity {
 
         //TODO dohvatanje svih live utakmica i ispis
         /**
-         * dohvatanje ScrollView-a
+         * dohvatanje ScrollView-a  X
          * dohvatanje podataka iz baze(sa live izmenama)
          * dinamicko filovanje u Scroll
          * dodoavanje dugmeta koji poziva ispit jedne utakmice
          */
+
+
+        myRecyclerView=findViewById(R.id.home_recycle);
     }
 
 }
