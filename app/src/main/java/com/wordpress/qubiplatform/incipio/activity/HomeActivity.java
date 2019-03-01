@@ -1,15 +1,25 @@
 package com.wordpress.qubiplatform.incipio.activity;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.wordpress.qubiplatform.incipio.R;
+import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
+import com.wordpress.qubiplatform.incipio.firebase.Game;
+import com.wordpress.qubiplatform.incipio.util.HomeRecyclerAdapter;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -17,7 +27,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView myRecyclerView;
 
-
+    private FBViewModel fbViewModel;
+    private HomeRecyclerAdapter adapter;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -64,7 +75,23 @@ public class HomeActivity extends AppCompatActivity {
          */
 
 
+        fbViewModel= ViewModelProviders.of(this).get(FBViewModel.class);
+        adapter=new HomeRecyclerAdapter();
+
         myRecyclerView=findViewById(R.id.home_recycle);
+        myRecyclerView.setAdapter(adapter);
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        fbViewModel.getGames().observe(this, new Observer<List<Game>>() {
+            @Override
+            public void onChanged(@Nullable List<Game> games) {
+                //TODO optimizacija loadovanja
+                /**
+                 * umesto set games, moze Toast koji kaze refreshujte povlacenjem na dole
+                 */
+                adapter.setGames(games);
+            }
+        });
     }
 
 }
