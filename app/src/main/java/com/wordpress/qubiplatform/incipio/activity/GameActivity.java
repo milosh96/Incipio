@@ -1,5 +1,6 @@
 package com.wordpress.qubiplatform.incipio.activity;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -26,7 +27,7 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
     private static final String log_tag="GameActivity";
     public static final int BONUS_ACTIVITY=12345;
     public static final int FORUM_ACTIVITY=54321;
-    public static final int DM_ACTIVITY=98765;
+    public static final int DM_ACTIVITY=8765;
 
     private String gameId="";
 
@@ -78,9 +79,9 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
             @Override
             public void onClick(View v) {
                 //new Intent
-                Intent intent=new Intent(getApplicationContext(),BonusActivity.class);
+                Intent intent=new Intent(v.getContext(),BonusActivity.class);
                 intent.putExtra("GAME_ID",gameId);
-                startActivityForResult(intent,BONUS_ACTIVITY);
+                ((Activity) v.getContext()).startActivityForResult(intent,BONUS_ACTIVITY);
             }
         });
 
@@ -88,9 +89,10 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
             @Override
             public void onClick(View v) {
                 //intent for direct message
-                Intent intent=new Intent(getApplicationContext(),DirectMssgActivity.class);
+                Intent intent=new Intent(v.getContext(),DirectMssgActivity.class);
                 intent.putExtra("GAME_ID",gameId);
-                startActivityForResult(intent,DM_ACTIVITY);
+
+                ((Activity) v.getContext()).startActivityForResult(intent,DM_ACTIVITY);
             }
         });
 
@@ -98,9 +100,9 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
             @Override
             public void onClick(View v) {
                 //intent for public forum
-                Intent intent=new Intent(getApplicationContext(),ForumActivity.class);
+                Intent intent=new Intent(v.getContext(),ForumActivity.class);
                 intent.putExtra("GAME_ID",gameId);
-                startActivityForResult(intent,FORUM_ACTIVITY);
+                ((Activity) v.getContext()).startActivityForResult(intent,FORUM_ACTIVITY);
             }
         });
     }
@@ -142,7 +144,7 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
                 else{
 
                 }
-                
+
                 break;
             }
         }
