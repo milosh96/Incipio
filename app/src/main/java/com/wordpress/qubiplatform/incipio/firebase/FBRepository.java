@@ -5,39 +5,61 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class FBRepository {
 
+    private static final String log_tag="FBRepository";
     //reference
 
     private static FirebaseDatabase firebaseDatabase;
 
-    private DatabaseReference myRef;
+    private FBViewModel fbViewModel;
 
-    public FBRepository(Context context){
+    private List<Game> games=new ArrayList<>();
+
+    public FBRepository(Context context, FBViewModel fbViewModel){
         if(firebaseDatabase==null) {
             firebaseDatabase = FirebaseDatabase.getInstance();
         }
+        this.fbViewModel=fbViewModel;
     }
 
-    public LiveData<List<Game>> getGames(){
+    public void getGames(){
         //dohvatamo listu svih utakmica sa statusom aktiv?
         //TODO not working
-        LiveData<List<Game>> games=new LiveData<List<Game>>() {
-            @Override
-            public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<List<Game>> observer) {
-                super.observe(owner, observer);
-            }
-        };
 
-        myRef=firebaseDatabase.getReference("game");
+        DatabaseReference myRef=firebaseDatabase.getReference("game");
         myRef.orderByChild("channel");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //kreiramo listu i posaljemo u viewmodel
+                games.clear();
+                for (DataSnapshot oneGame:dataSnapshot.getChildren()){
+                    //key value parovi
+                    String id=oneGame.getKey();
+                    Game game=oneGame.getValue(Game.class);
+                    game.setId(id);
+                    games.add(game);
+                }
+                fbViewModel.setGames(games);
+            }
 
-        return games;
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //TODO log i ispis korsniku
+                Log.d(log_tag,"Greska kod dohvatanja utakmica");
+            }
+        });
     }
 }

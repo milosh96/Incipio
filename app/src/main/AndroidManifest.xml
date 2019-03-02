@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- old login
+
+        <!--
+        old login
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name">
@@ -24,41 +26,18 @@
         </activity>
         -->
 
-
-        <activity android:name=".activity.login.BaseActivity">
-
-        </activity>
-
+        <activity android:name=".activity.login.BaseActivity"></activity>
         <activity
-
             android:name=".activity.login.GoogleSignInActivity"
-
             android:label="@string/label_google_sign_in" />
-
-        <activity android:name=".activity.login.ChooserActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".activity.login.ChooserActivity"></activity>
         <activity
-
             android:name=".activity.login.FacebookLoginActivity"
-
             android:label="@string/label_facebook_login" />
-
         <activity
-
             android:name=".activity.login.EmailPasswordActivity"
-
             android:label="@string/label_emailpassword"
-
             android:windowSoftInputMode="stateAlwaysHidden" />
-
-
-
 
         <!-- Facebook Configuration -->
         <meta-data
@@ -67,18 +46,21 @@
             tools:replace="android:value" />
 
         <activity
-
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             tools:replace="android:theme" />
-
-
         <activity
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".activity.GameActivity"></activity>
     </application>
 
 </manifest>

@@ -21,7 +21,7 @@ import com.wordpress.qubiplatform.incipio.util.HomeRecyclerAdapter;
 
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements FBViewModel.DataUpdate {
 
     private TextView mTextMessage;
 
@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -76,22 +76,29 @@ public class HomeActivity extends AppCompatActivity {
 
 
         fbViewModel= ViewModelProviders.of(this).get(FBViewModel.class);
+        fbViewModel.setListener(this);
         adapter=new HomeRecyclerAdapter();
 
         myRecyclerView=findViewById(R.id.home_recycle);
         myRecyclerView.setAdapter(adapter);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        fbViewModel.getGames().observe(this, new Observer<List<Game>>() {
-            @Override
-            public void onChanged(@Nullable List<Game> games) {
-                //TODO optimizacija loadovanja
-                /**
-                 * umesto set games, moze Toast koji kaze refreshujte povlacenjem na dole
-                 */
-                adapter.setGames(games);
-            }
-        });
+//        fbViewModel.getGames().observe(this, new Observer<List<Game>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Game> games) {
+//                //TODO optimizacija loadovanja
+//                /**
+//                 * umesto set games, moze Toast koji kaze refreshujte povlacenjem na dole
+//                 */
+//                adapter.setGames(games);
+//            }
+//        });
+
+        fbViewModel.getGames();
     }
 
+    @Override
+    public void setGames(List<Game> games) {
+        adapter.setGames(games);
+    }
 }

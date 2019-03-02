@@ -54,4 +54,8 @@ public class Game {
         this.id = id;
         this.status = status;
     }
+
+    public Game(){
+
+    }
 }

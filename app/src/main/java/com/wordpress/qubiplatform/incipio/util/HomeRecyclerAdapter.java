@@ -1,5 +1,6 @@
 package com.wordpress.qubiplatform.incipio.util;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
+import com.wordpress.qubiplatform.incipio.activity.GameActivity;
 import com.wordpress.qubiplatform.incipio.firebase.Game;
 
 import java.util.ArrayList;
@@ -51,7 +54,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         private ImageView mChannelPadd;
         private LinearLayout mLayout;
 
-        public GameHolder(View itemView) {
+        public GameHolder(final View itemView) {
             super(itemView);
 
             //add on click
@@ -65,6 +68,9 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
                     String gameId=game.getId();
 
                     //Intent za game details
+                    Intent intent=new Intent(itemView.getContext(),GameActivity.class);
+                    intent.putExtra("GAME_ID", gameId);
+                    itemView.getContext().startActivity(intent);
                 }
             });
 
