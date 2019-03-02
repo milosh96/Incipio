@@ -1,6 +1,7 @@
 package com.wordpress.qubiplatform.incipio.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +24,10 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity implements FBViewModel.DataUpdate {
 
     private static final String log_tag="GameActivity";
+    public static final int BONUS_ACTIVITY=12345;
+    public static final int FORUM_ACTIVITY=54321;
+    public static final int DM_ACTIVITY=98765;
+
     private String gameId="";
 
     //image views
@@ -38,7 +44,7 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
         setContentView(R.layout.activity_game);
 
         Log.d(log_tag,"Game activity entered");
-        Bundle data=getIntent().getExtras();
+        final Bundle data=getIntent().getExtras();
 
         if(data!=null){
             gameId=data.getString("GAME_ID");
@@ -66,6 +72,80 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
         imageBonus=findViewById(R.id.image_bonus);
         imageChat=findViewById(R.id.image_chat);
         imageMssg=findViewById(R.id.image_message);
+
+
+        imageBonus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //new Intent
+                Intent intent=new Intent(getApplicationContext(),BonusActivity.class);
+                intent.putExtra("GAME_ID",gameId);
+                startActivityForResult(intent,BONUS_ACTIVITY);
+            }
+        });
+
+        imageMssg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //intent for direct message
+                Intent intent=new Intent(getApplicationContext(),DirectMssgActivity.class);
+                intent.putExtra("GAME_ID",gameId);
+                startActivityForResult(intent,DM_ACTIVITY);
+            }
+        });
+
+        imageChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //intent for public forum
+                Intent intent=new Intent(getApplicationContext(),ForumActivity.class);
+                intent.putExtra("GAME_ID",gameId);
+                startActivityForResult(intent,FORUM_ACTIVITY);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case FORUM_ACTIVITY:{
+
+                if(requestCode==RESULT_OK){
+
+                }
+                else{
+
+                }
+
+                break;
+            }
+
+            case DM_ACTIVITY:{
+
+                if(requestCode==RESULT_OK){
+
+                }
+                else{
+
+                }
+
+                break;
+            }
+
+            case BONUS_ACTIVITY:{
+
+                if(requestCode==RESULT_OK){
+
+                }
+                else{
+
+                }
+                
+                break;
+            }
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
