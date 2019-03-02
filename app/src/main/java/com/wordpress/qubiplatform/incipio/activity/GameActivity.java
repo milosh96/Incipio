@@ -1,5 +1,6 @@
 package com.wordpress.qubiplatform.incipio.activity;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -7,15 +8,30 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
+import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
+import com.wordpress.qubiplatform.incipio.firebase.Game;
 
-public class GameActivity extends AppCompatActivity {
+import java.util.List;
+
+public class GameActivity extends AppCompatActivity implements FBViewModel.DataUpdate {
 
     private static final String log_tag="GameActivity";
     private String gameId="";
+
+    //image views
+    private ImageView imageMssg;
+    private ImageView imageChat;
+    private ImageView imageBonus;
+
+    private FBViewModel fbViewModel;
+    private Game game;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
 
-        Toolbar toolbar = findViewById(R.id.home_toolbar);
+        Toolbar toolbar = findViewById(R.id.game_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -38,6 +54,18 @@ public class GameActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
+
+
+        fbViewModel= ViewModelProviders.of(this).get(FBViewModel.class);
+        fbViewModel.setListener(this);
+
+        fbViewModel.getGame(gameId);
+
+        //image onClick
+
+        imageBonus=findViewById(R.id.image_bonus);
+        imageChat=findViewById(R.id.image_chat);
+        imageMssg=findViewById(R.id.image_message);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -63,4 +91,16 @@ public class GameActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    @Override
+    public void setGames(List<Game> games) {
+        //empty here
+    }
+
+    @Override
+    public void setGame(Game game) {
+        this.game=game;
+        TextView desc=findViewById(R.id.game_description);
+        desc.setText(game.getDescription());
+    }
 }

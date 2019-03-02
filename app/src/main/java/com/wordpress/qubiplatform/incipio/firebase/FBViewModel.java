@@ -25,6 +25,14 @@ public class FBViewModel extends AndroidViewModel {
         fbRepository.getGames();
     }
 
+    public void getGame(String id){
+        fbRepository.getGame(id);
+    }
+
+    public void setGame(Game game){
+        listener.setGame(game);
+    }
+
     public void setGames(List<Game> games){
         listener.setGames(games);
     }
@@ -41,5 +49,6 @@ public class FBViewModel extends AndroidViewModel {
 
     public interface DataUpdate{
         void setGames(List<Game> games);
+        void setGame(Game game);
     }
 }

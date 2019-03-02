@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Incipio</string>
+    <string name="app_name">SK +</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -168,5 +168,8 @@
     <string name="id_fmt">User ID: %s</string>
 
     <string name="email_fmt">Email: %s</string>
+    <string name="game_opt1">1. Poruka komentatoru</string>
+    <string name="game_opt2">2. Forum</string>
+    <string name="game_opt3">3. Bonus</string>
 
 </resources>

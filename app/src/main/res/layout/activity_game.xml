@@ -7,11 +7,114 @@
     tools:context=".activity.GameActivity">
 
     <include
-        android:id="@+id/home_toolbar"
+        android:id="@+id/game_toolbar"
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <!-- Opis -->
+    <TextView
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/game_toolbar"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:text="A vs B"
+        android:textStyle="bold"
+        android:id="@+id/game_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Pocetak liste sa opcijama -->
+<LinearLayout
+
+    android:id="@+id/layout_game_options"
+    android:layout_margin="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/game_description"
+    app:layout_constraintBottom_toTopOf="@id/navigation"
+    android:orientation="vertical">
+
+    <!-- 3 opcije -->
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:text="@string/game_opt1"
+                android:textColor="@color/colorRed"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/image_message"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:paddingBottom="20dp"
+                android:src="@drawable/message"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:text="@string/game_opt2"
+                android:textColor="@color/colorRed"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:paddingBottom="20dp"
+                android:id="@+id/image_chat"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/chat"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:text="@string/game_opt3"
+                android:textColor="@color/colorRed"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/image_bonus"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/bonus"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+    <!-- Kraj liste sa opcijama -->
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

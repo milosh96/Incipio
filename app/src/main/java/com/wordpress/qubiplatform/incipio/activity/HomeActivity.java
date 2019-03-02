@@ -101,4 +101,9 @@ public class HomeActivity extends AppCompatActivity implements FBViewModel.DataU
     public void setGames(List<Game> games) {
         adapter.setGames(games);
     }
+
+    @Override
+    public void setGame(Game game) {
+        //empty here
+    }
 }

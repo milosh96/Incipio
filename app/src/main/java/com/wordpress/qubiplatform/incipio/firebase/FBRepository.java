@@ -62,4 +62,24 @@ class FBRepository {
             }
         });
     }
+
+    public void getGame(final String id){
+        //TODO security check
+        DatabaseReference myRef=firebaseDatabase.getReference("game");
+        myRef.child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //TODO check if cond good and add return
+                Log.d(log_tag,"Game with id : "+id);
+                Game game= dataSnapshot.getValue(Game.class);
+                game.setId(id);
+                fbViewModel.setGame(game);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //nothing TODO add logging
+            }
+        });
+    }
 }
