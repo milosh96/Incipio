@@ -21,6 +21,10 @@ public class FBViewModel extends AndroidViewModel {
 
     }
 
+    public void sendDM(String gameId, String userId, String title, String body){
+        fbRepository.sendDM(gameId, userId, title, body);
+    }
+
     public void getGames(){
         fbRepository.getGames();
     }

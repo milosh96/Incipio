@@ -171,5 +171,8 @@
     <string name="game_opt1">1. Poruka komentatoru</string>
     <string name="game_opt2">2. Forum</string>
     <string name="game_opt3">3. Bonus</string>
+    <string name="naslov_poruke">Naslov poruke</string>
+    <string name="telo_poruke">Telo poruke</string>
+    <string name="mail_send">Posalji</string>
 
 </resources>

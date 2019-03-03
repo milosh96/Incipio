@@ -82,4 +82,13 @@ class FBRepository {
             }
         });
     }
+
+    public void sendDM(String gameId, String userId, String title, String body){
+        //TODO
+        /**
+         * nova klasa MAIl
+         * odradi push
+         * dodaj polja
+         */
+    }
 }

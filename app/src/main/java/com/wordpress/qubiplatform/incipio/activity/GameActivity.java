@@ -49,7 +49,7 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
 
         if(data!=null){
             gameId=data.getString("GAME_ID");
-            Toast.makeText(this,"Game id is something",Toast.LENGTH_LONG);
+            //Toast.makeText(this,"Game id is something",Toast.LENGTH_LONG);
         }
 
 
