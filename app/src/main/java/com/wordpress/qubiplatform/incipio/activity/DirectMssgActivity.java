@@ -1,5 +1,7 @@
 package com.wordpress.qubiplatform.incipio.activity;
 
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
@@ -17,6 +21,10 @@ public class DirectMssgActivity extends AppCompatActivity {
     public static final String log_tag="DirectMssg";
     private String gameId;
     private FBViewModel fbViewModel;
+
+    //polja za unos
+    private EditText title;
+    private EditText body;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +53,37 @@ public class DirectMssgActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
+
+        fbViewModel= ViewModelProviders.of(this).get(FBViewModel.class);
+
+        title=findViewById(R.id.mail_title);
+        body=findViewById(R.id.mail_body);
+
+        Button send=findViewById(R.id.mail_send);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mssg_title=title.getText().toString();
+                String mssg_body=title.getText().toString();
+
+                //TODO dohvatiti userId?
+                String userId="";
+
+                fbViewModel.sendDM(gameId,userId, mssg_title, mssg_body);
+
+//                Intent intent=new Intent();
+//                intent.putExtra("success_status","success");
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
         //TODO Kreiraj intent sa RESULT_CANCELED
-
+        setResult(RESULT_CANCELED);
         super.onBackPressed();
     }
 

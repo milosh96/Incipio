@@ -133,10 +133,11 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
             case DM_ACTIVITY:{
 
                 if(requestCode==RESULT_OK){
-
+                    //make toast
+                    Toast.makeText(getApplicationContext(),"Poruka uspesno poslata", Toast.LENGTH_LONG);
                 }
                 else{
-
+                    Toast.makeText(getApplicationContext(),"Poruka neuspesno poslata", Toast.LENGTH_LONG);
                 }
 
                 break;
