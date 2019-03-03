@@ -56,7 +56,13 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
         Toolbar toolbar = findViewById(R.id.game_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
