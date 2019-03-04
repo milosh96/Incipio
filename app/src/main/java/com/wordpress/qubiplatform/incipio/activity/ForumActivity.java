@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
@@ -53,6 +54,29 @@ public class ForumActivity extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_home);
 
         fbViewModel= ViewModelProviders.of(this).get(FBViewModel.class);
+
+        chatMssg=findViewById(R.id.chat_mssg);
+        send=findViewById(R.id.chat_btn);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //formiranje intenta i slanje poruke(uspesan toast)
+
+                String poruka=chatMssg.getText().toString();
+
+                String userId="";
+                //TODO get with auth
+
+                if(poruka.trim().equals("")){
+                    Toast.makeText(v.getContext(),"Telo poruke je obavezno.",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                fbViewModel.sendChat(gameId,userId,  poruka);
+            }
+        });
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
