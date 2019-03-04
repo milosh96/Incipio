@@ -131,13 +131,13 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
             }
 
             case DM_ACTIVITY:{
-
-                if(requestCode==RESULT_OK){
+                Log.d(log_tag,"Vratio se iz DM activity.");
+                if(resultCode==RESULT_OK){
                     //make toast
-                    Toast.makeText(getApplicationContext(),"Poruka uspesno poslata", Toast.LENGTH_LONG);
+                    Toast.makeText(this,"Poruka uspesno poslata", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Poruka neuspesno poslata", Toast.LENGTH_LONG);
+                    Toast.makeText(this,"Poruka neuspesno poslata", Toast.LENGTH_LONG).show();
                 }
 
                 break;

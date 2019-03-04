@@ -6,4 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".activity.ForumActivity">
 
+    <include
+        android:id="@+id/game_toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/game_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/sendLayout"
+        android:layout_margin="5dp"
+        tools:listitem="@layout/chat_element"
+        android:id="@+id/forumRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <RelativeLayout
+        app:layout_constraintBottom_toTopOf="@id/navigation"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/sendLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/chat_mssg"
+            android:hint="Poruka"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/chat_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <ImageButton
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:id="@+id/chat_btn"
+            android:src="@drawable/ic_send_red"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
+        app:menu="@menu/navigation" />
+
 </android.support.constraint.ConstraintLayout>

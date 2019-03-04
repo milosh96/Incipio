@@ -1,5 +1,6 @@
 package com.wordpress.qubiplatform.incipio.activity;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
@@ -65,8 +67,12 @@ public class DirectMssgActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mssg_title=title.getText().toString();
-                String mssg_body=title.getText().toString();
+                String mssg_body=body.getText().toString();
 
+                if(mssg_title.trim().equals("")||mssg_body.trim().equals("")){
+                    Toast.makeText(v.getContext(),"Sva polja su obavezna",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 //TODO dohvatiti userId?
                 String userId="";
 

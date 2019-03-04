@@ -23,26 +23,40 @@
         android:layout_height="wrap_content">
 
         <EditText
+
+            android:background="@color/colorPrimary"
             android:id="@+id/mail_title"
             android:hint="@string/naslov_poruke"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="40dp" />
+
+        <View
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorRed"/>
+
         <EditText
+            android:background="@color/colorPrimary"
             android:gravity="left|top"
             android:id="@+id/mail_body"
             android:hint="@string/telo_poruke"
             android:inputType="text|textMultiLine"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="300dp" />
 
     </LinearLayout>
 
     <Button
+
+        android:background="@color/colorRed"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:padding="15dp"
+        android:padding="10dp"
         android:textSize="16dp"
         android:id="@+id/mail_send"
         app:layout_constraintBottom_toTopOf="@id/navigation"
