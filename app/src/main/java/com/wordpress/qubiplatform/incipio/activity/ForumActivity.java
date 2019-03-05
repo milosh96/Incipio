@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,9 +16,14 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Game;
+import com.wordpress.qubiplatform.incipio.util.ForumRecyclerAdapter;
 
-public class ForumActivity extends AppCompatActivity {
+import java.util.List;
+
+public class ForumActivity extends AppCompatActivity implements FBViewModel.DataUpdate{
 
     public static final String log_tag="DirectMssg";
     private String gameId;
@@ -24,6 +31,10 @@ public class ForumActivity extends AppCompatActivity {
 
     private EditText chatMssg;
     private ImageButton send;
+
+    //recycler
+    private RecyclerView myRecyclerView;
+    private ForumRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,7 @@ public class ForumActivity extends AppCompatActivity {
         navigation.setSelectedItemId(R.id.navigation_home);
 
         fbViewModel= ViewModelProviders.of(this).get(FBViewModel.class);
+        fbViewModel.setListener(this);
 
         chatMssg=findViewById(R.id.chat_mssg);
         send=findViewById(R.id.chat_btn);
@@ -73,9 +85,17 @@ public class ForumActivity extends AppCompatActivity {
                     return;
                 }
 
-                fbViewModel.sendChat(gameId,userId,  poruka);
+                fbViewModel.sendChat(gameId,userId,poruka);
             }
         });
+
+        //recycler
+        adapter=new ForumRecyclerAdapter();
+        myRecyclerView=findViewById(R.id.forumRecycler);
+        myRecyclerView.setAdapter(adapter);
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        fbViewModel.getForum(gameId);
 
     }
 
@@ -102,4 +122,20 @@ public class ForumActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    @Override
+    public void setGames(List<Game> games) {
+        //empty
+    }
+
+    @Override
+    public void setGame(Game game) {
+        //empty
+    }
+
+    @Override
+    public void setForum(List<Chat> forum) {
+        //TODO update bolje uraditi
+        adapter.setForum(forum);
+    }
 }

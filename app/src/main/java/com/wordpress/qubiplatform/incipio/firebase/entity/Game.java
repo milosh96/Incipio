@@ -1,4 +1,4 @@
-package com.wordpress.qubiplatform.incipio.firebase;
+package com.wordpress.qubiplatform.incipio.firebase.entity;
 
 public class Game {
 

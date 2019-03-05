@@ -1,8 +1,5 @@
 package com.wordpress.qubiplatform.incipio.firebase;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -12,9 +9,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Game;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Mail;
+import com.wordpress.qubiplatform.incipio.firebase.entity.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 class FBRepository {
 
@@ -26,6 +29,8 @@ class FBRepository {
     private FBViewModel fbViewModel;
 
     private List<Game> games=new ArrayList<>();
+
+    private List<Chat> forum=new ArrayList<>();
 
     public FBRepository(Context context, FBViewModel fbViewModel){
         if(firebaseDatabase==null) {
@@ -90,5 +95,73 @@ class FBRepository {
          * odradi push
          * dodaj polja
          */
+        DatabaseReference myRef=firebaseDatabase.getReference("mail");
+
+        String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+        myRef.push().setValue(new Mail(body,title,userId, gameId,timeStamp));
+
+    }
+
+    public void sendChat(String gameId, String userId, String poruka){
+        DatabaseReference myRef=firebaseDatabase.getReference("forum");
+        String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+
+        myRef.push().setValue(new Chat(gameId,userId,poruka,""));
+    }
+
+    private void getUserName(){
+        DatabaseReference myRef=firebaseDatabase.getReference("users");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //kreiramo listu i posaljemo u viewmodel
+                for (DataSnapshot oneGame:dataSnapshot.getChildren()){
+                    //key value parovi
+                    User user=oneGame.getValue(User.class);;
+                    for(int i=0;i<forum.size();i++){
+                        Chat chat=forum.get(i);
+                        if(chat.getIdUser().equals(oneGame.getKey())){
+                            forum.get(i).setUserName(user.getFirstName()+" "+user.getLastName());
+                            break;
+                        }
+                    }
+                }
+                fbViewModel.setForum(forum);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //TODO log i ispis korsniku
+                Log.d(log_tag,"Greska kod dohvatanja imena korisnika");
+            }
+        });
+    }
+
+    public void getForum(String gameId){
+        DatabaseReference myRef=firebaseDatabase.getReference("forum");
+        myRef.orderByChild("idGame").equalTo(gameId);
+        myRef.orderByChild("timestamp");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //kreiramo listu i posaljemo u viewmodel
+                forum.clear();
+                for (DataSnapshot oneGame:dataSnapshot.getChildren()){
+                    //key value parovi
+                    String id=oneGame.getKey();
+                    Chat chat=oneGame.getValue(Chat.class);
+                    chat.setId(id);
+                    forum.add(chat);
+                }
+                //fbViewModel.setForum(forum);
+                getUserName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //TODO log i ispis korsniku
+                Log.d(log_tag,"Greska kod dohvatanja poruke");
+            }
+        });
     }
 }

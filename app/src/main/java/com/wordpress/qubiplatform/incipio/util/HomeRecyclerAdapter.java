@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.activity.GameActivity;
-import com.wordpress.qubiplatform.incipio.firebase.Game;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Game;
 
 import java.util.ArrayList;
 import java.util.List;

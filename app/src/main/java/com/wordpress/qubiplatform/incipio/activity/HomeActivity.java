@@ -1,11 +1,8 @@
 package com.wordpress.qubiplatform.incipio.activity;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +12,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.wordpress.qubiplatform.incipio.R;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
-import com.wordpress.qubiplatform.incipio.firebase.Game;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Game;
 import com.wordpress.qubiplatform.incipio.util.HomeRecyclerAdapter;
 
 import java.util.List;
@@ -105,5 +103,10 @@ public class HomeActivity extends AppCompatActivity implements FBViewModel.DataU
     @Override
     public void setGame(Game game) {
         //empty here
+    }
+
+    @Override
+    public void setForum(List<Chat> forum) {
+        //empty
     }
 }

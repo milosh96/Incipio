@@ -12,13 +12,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
-import com.wordpress.qubiplatform.incipio.firebase.Game;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Game;
 
 import java.util.List;
 
@@ -191,5 +191,10 @@ public class GameActivity extends AppCompatActivity implements FBViewModel.DataU
         this.game=game;
         TextView desc=findViewById(R.id.game_description);
         desc.setText(game.getDescription());
+    }
+
+    @Override
+    public void setForum(List<Chat> forum) {
+        //empty
     }
 }

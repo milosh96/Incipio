@@ -2,11 +2,12 @@ package com.wordpress.qubiplatform.incipio.firebase;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Game;
 
 import java.util.List;
 
@@ -27,6 +28,12 @@ public class FBViewModel extends AndroidViewModel {
 
     public void sendChat(String gameId, String userId, String poruka){
         //TODO
+
+        fbRepository.sendChat(gameId,userId,poruka);
+    }
+
+    public void getForum(String gameId){
+        fbRepository.getForum(gameId);
     }
 
     public void getGames(){
@@ -45,6 +52,8 @@ public class FBViewModel extends AndroidViewModel {
         listener.setGames(games);
     }
 
+    public void setForum(List<Chat> forum) {listener.setForum(forum);}
+
     public void setListener(Context context){
         if(context instanceof DataUpdate){
             listener=(DataUpdate) context;
@@ -58,5 +67,6 @@ public class FBViewModel extends AndroidViewModel {
     public interface DataUpdate{
         void setGames(List<Game> games);
         void setGame(Game game);
+        void setForum(List<Chat> forum);
     }
 }
