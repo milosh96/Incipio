@@ -86,6 +86,7 @@ public class ForumActivity extends AppCompatActivity implements FBViewModel.Data
                 }
 
                 fbViewModel.sendChat(gameId,userId,poruka);
+                chatMssg.setText("");
             }
         });
 

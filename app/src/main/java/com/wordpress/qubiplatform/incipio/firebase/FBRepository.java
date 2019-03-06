@@ -15,6 +15,7 @@ import com.wordpress.qubiplatform.incipio.firebase.entity.Mail;
 import com.wordpress.qubiplatform.incipio.firebase.entity.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -138,10 +139,10 @@ class FBRepository {
     }
 
     public void getForum(String gameId){
+        //TODO kako dodati i orderbytimestamp?
         DatabaseReference myRef=firebaseDatabase.getReference("forum");
-        myRef.orderByChild("idGame").equalTo(gameId);
-        myRef.orderByChild("timestamp");
-        myRef.addValueEventListener(new ValueEventListener() {
+
+        myRef.orderByChild("idGame").equalTo(gameId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //kreiramo listu i posaljemo u viewmodel
@@ -154,6 +155,7 @@ class FBRepository {
                     forum.add(chat);
                 }
                 //fbViewModel.setForum(forum);
+                Collections.reverse(forum);
                 getUserName();
             }
 
