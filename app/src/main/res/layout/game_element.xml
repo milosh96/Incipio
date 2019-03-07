@@ -11,17 +11,17 @@
     android:layout_height="wrap_content">
 
 
-    <LinearLayout android:paddingTop="5dp"
-    android:id="@+id/game_bar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_marginBottom="8dp"
-    android:layout_height="wrap_content">
-<!--LEvo crveni blok sa 2 slike, SK i broj kanala dinamicki, text view i image btn enter-->
-<!--
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/game_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+        <!--LEvo crveni blok sa 2 slike, SK i broj kanala dinamicki, text view i image btn enter-->
+        <!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,66 +41,82 @@
             android:src="@drawable/channel1" />
     </LinearLayout>
 -->
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/channel_image"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:background="@color/colorRed"
-        android:src="@drawable/sk1" />
-    <ImageView
-        android:id="@+id/channel_image_padding"
-        android:background="@color/colorRed"
-        android:layout_width="10dp"
-        android:layout_height="50dp" />
-    <RelativeLayout
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/channel_image"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:background="@color/colorRed"
+            android:src="@drawable/sk1" />
 
-        <TextView
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:id="@+id/game_description"
-            android:layout_width="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="38dp"
-            android:layout_marginRight="38dp"
-            android:text="LA Lakers - Boston Celtics"
-            android:textColor="@color/colorBlack"
-            android:textSize="18dp"
-            app:fontFamily="@font/timeburnerbold" />
-<!--
-Veritkalni separator - TODO
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="-17dp"
-            android:layout_toLeftOf="@id/game_enter_image"
-            android:layout_toRightOf="@id/game_description"
-            android:src="@drawable/vertical_separator3" />
-            -->
-        <ImageView
-            android:layout_width="50dp"
-            android:id="@+id/game_enter_image"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="0dp"
-            android:src="@drawable/iconfinder_ic_keyboard_arrow_right" />
-    </RelativeLayout>
+            android:id="@+id/channel_image_padding"
+            android:layout_width="10dp"
+            android:layout_height="100dp"
+            android:background="@color/colorRed" />
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/game_description"
+                android:layout_width="wrap_content"
+                android:layout_height="68dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="38dp"
+                android:layout_marginRight="38dp"
+                android:layout_marginBottom="32dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="LA Lakers - Boston Celtics"
+                android:textColor="@color/colorBlack"
+                android:textSize="18dp"
+                app:fontFamily="@font/timeburnerbold" />
+
+            <ImageView
+                android:id="@+id/game_enter_image"
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/iconfinder_ic_keyboard_arrow_right" />
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:orientation="horizontal">
+
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginBottom="0dp"
+                    android:progress="60" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

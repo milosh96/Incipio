@@ -54,18 +54,20 @@
         <activity
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.GameActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.ForumActivity" />
         <activity android:name=".activity.BonusActivity" />
-        <activity android:name=".activity.DirectMssgActivity"></activity>
+        <activity android:name=".activity.DirectMssgActivity" />
+        <activity android:name=".activity.ConnectionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
