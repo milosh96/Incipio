@@ -1,5 +1,6 @@
 package com.wordpress.qubiplatform.incipio.activity.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wordpress.qubiplatform.incipio.R;
+import com.wordpress.qubiplatform.incipio.activity.ConnectionActivity;
 
 /**
  * Created by Veljko on 10.4.2018..
@@ -42,7 +44,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
         findViewById(R.id.emailSignInButton).setOnClickListener(this);
         findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
+        findViewById(R.id.signOutButton).setOnClickListener(this);
         findViewById(R.id.verifyEmailB).setOnClickListener(this);
 
         Auth = FirebaseAuth.getInstance();
@@ -167,6 +169,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
             findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
             findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
+            startActivity(new Intent(this, ConnectionActivity.class));
             findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
 
             findViewById(R.id.verifyEmailB).setEnabled(!user.isEmailVerified());

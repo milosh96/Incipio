@@ -26,11 +26,20 @@
         </activity>
         -->
 
-        <activity android:name=".activity.login.BaseActivity" />
+        <activity android:name=".activity.login.BaseActivity">
+
+        </activity>
         <activity
             android:name=".activity.login.GoogleSignInActivity"
             android:label="@string/label_google_sign_in" />
-        <activity android:name=".activity.login.ChooserActivity" />
+
+        <activity android:name=".activity.login.ChooserActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.login.FacebookLoginActivity"
             android:label="@string/label_facebook_login" />
@@ -62,11 +71,7 @@
         <activity android:name=".activity.BonusActivity" />
         <activity android:name=".activity.DirectMssgActivity" />
         <activity android:name=".activity.ConnectionActivity" android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
