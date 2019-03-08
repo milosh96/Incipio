@@ -55,6 +55,7 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int b = 1;
+        int c = 0;
         Class clicked = CLASSES[position];
         startActivity(new Intent(this,clicked));
     }
