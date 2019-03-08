@@ -2,11 +2,13 @@ package com.wordpress.qubiplatform.incipio.util;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.wordpress.qubiplatform.incipio.R;
@@ -14,6 +16,7 @@ import com.wordpress.qubiplatform.incipio.activity.GameActivity;
 import com.wordpress.qubiplatform.incipio.firebase.entity.Game;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapter.GameHolder> {
@@ -32,6 +35,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         holder.setChannel(game.getChannel());
         holder.setDesc(game.getDescription());
         holder.setStatus(game.getStatus());
+        holder.setTime(game.getStartTime(), game.getEndTime());
     }
 
     @Override
@@ -52,6 +56,11 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         private TextView mDesc;
         private ImageView mChannelPadd;
         private LinearLayout mLayout;
+
+        //vers 2
+        private ProgressBar progressBar;
+        private TextView startTime;
+        private TextView endTime;
 
         public GameHolder(final View itemView) {
             super(itemView);
@@ -77,6 +86,10 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             mDesc=itemView.findViewById(R.id.game_description);
             mChannelPadd=itemView.findViewById(R.id.channel_image_padding);
             mLayout=itemView.findViewById(R.id.game_bar);
+
+            progressBar=itemView.findViewById(R.id.progressTime);
+            startTime=itemView.findViewById(R.id.startTime);
+            endTime=itemView.findViewById(R.id.endTime);
         }
 
         public void setChannel(int channel){
@@ -113,6 +126,62 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
              * mChannel
              * i mPadd
              */
+        }
+
+        public void setTime(String startTime, String endTime){
+            this.startTime.setText(startTime);
+            this.endTime.setText(endTime);
+
+            String[] starts=startTime.split(":");
+            String[] ends=endTime.split(":");
+
+            String startTimeHour=starts[0];
+            String startTimeMin=starts[1];
+            String endTimeHour=ends[0];
+            String endTimeMin=ends[1];
+
+
+
+            Calendar rightNow = Calendar.getInstance();
+            int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+            int minutes=rightNow.get(Calendar.MINUTE);
+
+            int startHour=0;
+            int startMinute=0;
+            int endHour=0;
+            int endMinute=0;
+
+            try{
+                startHour=Integer.parseInt(startTimeHour);
+                startMinute=Integer.parseInt(startTimeMin);
+
+                endHour=Integer.parseInt(endTimeHour);
+                endMinute=Integer.parseInt(endTimeMin);
+
+            }
+            catch (Exception e){
+                Log.d("ERROR","Greska kod parsiranja u int");
+                e.printStackTrace();
+            }
+
+            //racunanje procenta
+            int totalStart=startHour*60+startMinute;
+            int totalEnd=endHour*60+endMinute;
+            int totalCurr=hour*60+minutes;
+
+            if(totalCurr>=totalEnd){
+                //zavrsio se
+                progressBar.setProgress(100);
+            }
+            else if(totalCurr<=totalStart){
+                progressBar.setProgress(0);
+            }
+            else{
+                int diff=totalEnd-totalStart;
+                int curr=totalCurr-totalStart;
+                int progress=100*curr/diff;
+                progressBar.setProgress(progress);
+            }
         }
     }
 }

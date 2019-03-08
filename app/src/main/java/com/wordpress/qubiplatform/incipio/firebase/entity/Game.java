@@ -82,6 +82,9 @@ public class Game {
         this.description = description;
         this.id = id;
         this.status = status;
+        this.startTime="00:00";
+        this.endTime="00:00";
+        this.date="2019-1-1";
     }
 
     public Game(String startTime, String endTime, String date, int channel, String description, String status) {

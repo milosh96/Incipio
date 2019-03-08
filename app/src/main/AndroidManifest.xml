@@ -61,7 +61,7 @@
         <activity android:name=".activity.ForumActivity" />
         <activity android:name=".activity.BonusActivity" />
         <activity android:name=".activity.DirectMssgActivity" />
-        <activity android:name=".activity.ConnectionActivity">
+        <activity android:name=".activity.ConnectionActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

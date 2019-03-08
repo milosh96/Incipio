@@ -44,14 +44,14 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/channel_image"
             android:layout_width="60dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:background="@color/colorRed"
             android:src="@drawable/sk1" />
 
         <ImageView
             android:id="@+id/channel_image_padding"
-            android:layout_width="10dp"
-            android:layout_height="100dp"
+            android:layout_width="20dp"
+            android:layout_height="80dp"
             android:background="@color/colorRed" />
 
         <RelativeLayout
@@ -62,7 +62,7 @@
             <TextView
                 android:id="@+id/game_description"
                 android:layout_width="wrap_content"
-                android:layout_height="68dp"
+                android:layout_height="65dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
@@ -85,7 +85,7 @@
             <ImageView
                 android:id="@+id/game_enter_image"
                 android:layout_width="50dp"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
@@ -94,25 +94,33 @@
                 android:src="@drawable/iconfinder_ic_keyboard_arrow_right" />
 
             <LinearLayout
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
                 android:orientation="horizontal">
 
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    
+                <TextView
+                    android:text="18:00"
+                    android:id="@+id/startTime"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ProgressBar
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/progressTime"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-
-                    android:layout_marginLeft="36dp"
-                    android:layout_marginBottom="0dp"
                     android:progress="60" />
+
+                <TextView
+                    android:text="20:30"
+                    android:id="@+id/endTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </RelativeLayout>
 

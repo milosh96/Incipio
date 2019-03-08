@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/options_like" android:title="@string/options_like"></item>
+    <item android:id="@+id/options_dislike" android:title="@string/options_dislike"></item>
+    <item android:id="@+id/options_reply" android:title="@string/options_reply"></item>
+    <item android:id="@+id/options_profile" android:title="@string/options_profile"></item>
+</menu>

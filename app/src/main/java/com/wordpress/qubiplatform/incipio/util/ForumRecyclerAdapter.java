@@ -1,11 +1,15 @@
 package com.wordpress.qubiplatform.incipio.util;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
@@ -49,9 +53,12 @@ public class ForumRecyclerAdapter extends RecyclerView.Adapter<ForumRecyclerAdap
         private TextView dislikes;
         private TextView body;
         private ImageView options;
+        private Context context;
 
         public ChatHolder(View itemView) {
             super(itemView);
+
+            context=itemView.getContext();
 
             chat_owner=itemView.findViewById(R.id.chat_owner);
             likes=itemView.findViewById(R.id.chat_likes);
@@ -69,6 +76,38 @@ public class ForumRecyclerAdapter extends RecyclerView.Adapter<ForumRecyclerAdap
                      * dislike
                      * view profile
                      */
+
+                    PopupMenu menu=new PopupMenu(context,options);
+                    menu.inflate(R.menu.options);
+                    menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()){
+                                case R.id.options_like:{
+                                    Toast.makeText(context,"Opcija like",Toast.LENGTH_LONG).show();
+                                    break;
+                                }
+                                case R.id.options_dislike:{
+                                    Toast.makeText(context,"Opcija dislike",Toast.LENGTH_LONG).show();
+                                    break;
+                                }
+                                case R.id.options_reply:{
+                                    Toast.makeText(context,"Opcija reply",Toast.LENGTH_LONG).show();
+                                    break;
+                                }
+                                case R.id.options_profile:{
+                                    Toast.makeText(context,"Opcija profil",Toast.LENGTH_LONG).show();
+                                    break;
+                                }
+                                default:{
+                                    Toast.makeText(context,"Opcija default",Toast.LENGTH_LONG).show();
+                                    break;
+                                }
+                            }
+                            return false;
+                        }
+                    });
+                    menu.show();
                 }
             });
         }

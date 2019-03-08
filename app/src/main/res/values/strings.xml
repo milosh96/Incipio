@@ -174,5 +174,9 @@
     <string name="naslov_poruke">Naslov</string>
     <string name="telo_poruke">Sadrzaj</string>
     <string name="mail_send">Posalji</string>
+    <string name="options_like">Svidja mi se</string>
+    <string name="options_dislike">Ne svidja mi se</string>
+    <string name="options_reply">Odgovori</string>
+    <string name="options_profile">Pogledaj profil</string>
 
 </resources>
