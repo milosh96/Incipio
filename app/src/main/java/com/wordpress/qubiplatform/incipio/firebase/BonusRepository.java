@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
 import com.wordpress.qubiplatform.incipio.firebase.entity.Quiz;
+import com.wordpress.qubiplatform.incipio.firebase.entity.QuizReply;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,9 +46,17 @@ public class BonusRepository {
                 for (DataSnapshot oneGame:dataSnapshot.getChildren()){
                     //key value parovi
                     String id=oneGame.getKey();
-                    Quiz quiz=oneGame.getValue(Quiz.class);
-                    quiz.setId(id);
-                    quizzes.add(quiz);
+                    QuizReply quizReply=oneGame.getValue(QuizReply.class);
+                    quizReply.setId(id);
+                    for(Quiz quiz:quizzes){
+                        if(quiz.getId().equals(quizReply.getIdQuiz())){
+                            quiz.setColor("red");
+                        }
+                        else{
+                            //nothing color already set to green by default
+                        }
+                    }
+
                 }
                 bonusViewModel.setQuizzes(quizzes);
                 //Collections.reverse(forum);
@@ -79,8 +88,8 @@ public class BonusRepository {
                     quizzes.add(quiz);
                 }
                 //Collections.reverse(quizzes);
-                //getColor(userId);
-                bonusViewModel.setQuizzes(quizzes);
+                getColor(userId);
+                //bonusViewModel.setQuizzes(quizzes);
             }
 
             @Override

@@ -5,23 +5,37 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.BonusViewModel;
+import com.wordpress.qubiplatform.incipio.firebase.entity.Quiz;
 import com.wordpress.qubiplatform.incipio.util.BonusRecyclerAdapter;
 
-public class BonusActivity extends AppCompatActivity {
+import java.util.List;
+
+public class BonusActivity extends AppCompatActivity implements BonusViewModel.BonusUpdate {
 
     private BonusRecyclerAdapter adapter;
     private BonusViewModel bonusViewModel;
+    private RecyclerView bonusRecycle;
+    private String gameId="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bonus);
+
+        final Bundle data=getIntent().getExtras();
+
+        if(data!=null){
+            gameId=data.getString("GAME_ID");
+            //Toast.makeText(this,"Game id is something",Toast.LENGTH_LONG);
+        }
 
         Toolbar toolbar = findViewById(R.id.game_toolbar);
         setSupportActionBar(toolbar);
@@ -42,6 +56,13 @@ public class BonusActivity extends AppCompatActivity {
         bonusViewModel=ViewModelProviders.of(this).get(BonusViewModel.class);
         bonusViewModel.setListener(this);
 
+        bonusRecycle=findViewById(R.id.bonus_recycle);
+        bonusRecycle.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        bonusRecycle.setAdapter(adapter);
+
+        //TODO add get auth
+        String userId="AAy1PoVw27Ed5sdljaiY";
+        bonusViewModel.getQuiz(gameId,userId);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -67,4 +88,9 @@ public class BonusActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    @Override
+    public void setQuiz(List<Quiz> quizzes) {
+        adapter.setQuiz(quizzes);
+    }
 }

@@ -26,20 +26,11 @@
         </activity>
         -->
 
-        <activity android:name=".activity.login.BaseActivity">
-
-        </activity>
+        <activity android:name=".activity.login.BaseActivity"></activity>
         <activity
             android:name=".activity.login.GoogleSignInActivity"
             android:label="@string/label_google_sign_in" />
-
-        <activity android:name=".activity.login.ChooserActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.login.ChooserActivity"></activity>
         <activity
             android:name=".activity.login.FacebookLoginActivity"
             android:label="@string/label_facebook_login" />
@@ -62,17 +53,23 @@
             tools:replace="android:theme" />
         <activity
             android:name=".activity.HomeActivity"
-            android:label="@string/title_activity_home">
-        </activity>
+            android:label="@string/title_activity_home"></activity>
         <activity
             android:name=".activity.GameActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.ForumActivity" />
         <activity android:name=".activity.BonusActivity" />
         <activity android:name=".activity.DirectMssgActivity" />
-        <activity android:name=".activity.ConnectionActivity" android:noHistory="true">
+        <activity
+            android:name=".activity.ConnectionActivity"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".activity.QuizActivity"></activity>
     </application>
 
 </manifest>

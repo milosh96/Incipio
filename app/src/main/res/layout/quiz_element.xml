@@ -20,23 +20,25 @@
             android:background="@color/colorGreen"
             android:id="@+id/quiz_start"
             android:layout_width="5dp"
-            android:layout_height="40dp"/>
+            android:layout_height="60dp"/>
         <TextView
+            android:gravity="center"
             android:layout_toRightOf="@id/quiz_start"
             android:textStyle="bold"
             android:textSize="18dp"
             android:id="@+id/quiz_order"
             android:text="1."
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="60dp" />
         <TextView
+            android:gravity="center"
             android:layout_toRightOf="@+id/quiz_order"
             android:layout_marginLeft="10dp"
             android:textSize="16dp"
             android:id="@+id/quiz_title"
             android:text="Ocena komentatora"
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="60dp" />
 
         <View
             android:layout_alignParentRight="true"
@@ -44,7 +46,7 @@
             android:background="@color/colorGreen"
             android:id="@+id/quiz_end"
             android:layout_width="5dp"
-            android:layout_height="40dp"/>
+            android:layout_height="60dp"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

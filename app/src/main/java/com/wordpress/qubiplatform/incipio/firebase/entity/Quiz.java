@@ -10,7 +10,8 @@ public class Quiz {
     private String status;
     private String result;
     private String picture;
-    private List<Given> given;
+    //not working array
+    //private String[] given;
     private String color;
 
     public void setColor(String color) {
@@ -22,6 +23,7 @@ public class Quiz {
         return color;
     }
 
+    /*not working?
     class Given{
         private int order;
         private String answer;
@@ -53,8 +55,9 @@ public class Quiz {
             this.answer = answer;
         }
     }
+    */
 
-    public Quiz(){}
+    public Quiz(){this.color="green";}
 
     //osnovni
     public Quiz(String idGame, String type, String question, String status) {
@@ -62,6 +65,7 @@ public class Quiz {
         this.type = type;
         this.question = question;
         this.status = status;
+        this.color="green";
     }
     //sa slikom
     public Quiz(String idGame, String type, String question, String status, String picture) {
@@ -70,10 +74,12 @@ public class Quiz {
         this.question = question;
         this.status = status;
         this.picture = picture;
+        this.color="green";
     }
 
+    /*
     //sa ponudjenim i slikom
-    public Quiz(String idGame, String type, String question, String status, String result, String picture, List<Given> given) {
+    public Quiz(String idGame, String type, String question, String status, String result, String picture, String[] given) {
         this.idGame = idGame;
         this.type = type;
         this.question = question;
@@ -81,16 +87,19 @@ public class Quiz {
         this.result = result;
         this.picture = picture;
         this.given = given;
+        this.color="green";
     }
     //ponudjeni bez slike
-    public Quiz(String idGame, String type, String question, String status, String result, List<Given> given) {
+    public Quiz(String idGame, String type, String question, String status, String result, String[] given) {
         this.idGame = idGame;
         this.type = type;
         this.question = question;
         this.status = status;
         this.result = result;
         this.given = given;
+        this.color="green";
     }
+    */
 
     public void setId(String id) {
         this.id = id;
@@ -120,9 +129,9 @@ public class Quiz {
         this.picture = picture;
     }
 
-    public void setGiven(List<Given> given) {
-        this.given = given;
-    }
+//    public void setGiven(String[] given) {
+//        this.given = given;
+//    }
 
     public String getId() {
 
@@ -153,7 +162,7 @@ public class Quiz {
         return picture;
     }
 
-    public List<Given> getGiven() {
-        return given;
-    }
+//    public String[] getGiven() {
+//        return given;
+//    }
 }
