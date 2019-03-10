@@ -26,11 +26,11 @@
         </activity>
         -->
 
-        <activity android:name=".activity.login.BaseActivity"></activity>
+        <activity android:name=".activity.login.BaseActivity" />
         <activity
             android:name=".activity.login.GoogleSignInActivity"
             android:label="@string/label_google_sign_in" />
-        <activity android:name=".activity.login.ChooserActivity"></activity>
+        <activity android:name=".activity.login.ChooserActivity" />
         <activity
             android:name=".activity.login.FacebookLoginActivity"
             android:label="@string/label_facebook_login" />
@@ -53,7 +53,7 @@
             tools:replace="android:theme" />
         <activity
             android:name=".activity.HomeActivity"
-            android:label="@string/title_activity_home"></activity>
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".activity.GameActivity"
             android:screenOrientation="portrait" />
@@ -69,7 +69,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.QuizActivity"></activity>
+        <activity android:name=".activity.quiz.QuizActivity" />
+        <activity android:name=".activity.quiz.SimpleActivity" />
+        <activity android:name=".activity.quiz.RatingActivity"></activity>
     </application>
 
 </manifest>

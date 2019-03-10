@@ -15,9 +15,11 @@ public class ConnectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connection);
 
 
+        /* version 1
         Toolbar toolbar = findViewById(R.id.game_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        */
 
         new Thread(new Runnable() {
             @Override

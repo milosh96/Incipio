@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wordpress.qubiplatform.incipio.R;
-import com.wordpress.qubiplatform.incipio.activity.QuizActivity;
+import com.wordpress.qubiplatform.incipio.activity.quiz.QuizActivity;
+import com.wordpress.qubiplatform.incipio.activity.quiz.RatingActivity;
+import com.wordpress.qubiplatform.incipio.activity.quiz.SimpleActivity;
 import com.wordpress.qubiplatform.incipio.firebase.entity.Quiz;
 
 import java.util.ArrayList;
@@ -49,6 +51,7 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
         private TextView description;
         private TextView order;
         private String quizId="";
+        private String type="";
 
         public QuizHolder(View itemView) {
 
@@ -61,10 +64,32 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO add new activity
-                    Intent intent=new Intent(v.getContext(),QuizActivity.class);
-                    intent.putExtra("QUIZ_ID",quizId);
-                    v.getContext().startActivity(intent);
+                    //TODO define all types!
+                    //sve opcije mogu sa ili bezslike/ ne treba zaseban activity
+                    switch (type){
+                        case "rating":{
+                            //commentaators and stars to select
+                            Intent intent=new Intent(v.getContext(),RatingActivity.class);
+                            intent.putExtra("QUIZ_ID",quizId);
+                            v.getContext().startActivity(intent);
+                            break;
+                        }
+                        case "simple":{
+                            //just text field for input
+                            Intent intent=new Intent(v.getContext(),SimpleActivity.class);
+                            intent.putExtra("QUIZ_ID",quizId);
+                            v.getContext().startActivity(intent);
+                            break;
+                        }
+                        case "given":{
+                            //sa ponudjenim odgovorima
+                            Intent intent=new Intent(v.getContext(),QuizActivity.class);
+                            intent.putExtra("QUIZ_ID",quizId);
+                            v.getContext().startActivity(intent);
+                            break;
+                        }
+                    }
+
                 }
             });
 
@@ -85,6 +110,7 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
             order.setText(position+".");
             description.setText(quiz.getQuestion());
             quizId=quiz.getId();
+            type=quiz.getType();
 
         }
     }
