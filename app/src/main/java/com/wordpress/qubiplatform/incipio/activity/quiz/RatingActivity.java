@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.arch.lifecycle.ViewModelProviders;
 
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.BonusViewModel;
@@ -22,6 +24,23 @@ public class RatingActivity extends AppCompatActivity implements BonusViewModel.
     private String quizId="";
     private BonusViewModel bonusViewModel;
 
+    //comm 1
+    private ImageView star_1;
+    private ImageView star_2;
+    private ImageView star_3;
+    private ImageView star_4;
+    private ImageView star_5;
+
+    //comm 2
+    private ImageView star_12;
+    private ImageView star_22;
+    private ImageView star_32;
+    private ImageView star_42;
+    private ImageView star_52;
+
+    //only one rating
+    private boolean commentator_one=false;
+    private boolean commentator_two=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,35 +73,74 @@ public class RatingActivity extends AppCompatActivity implements BonusViewModel.
         bonusViewModel=ViewModelProviders.of(this).get(BonusViewModel.class);
         bonusViewModel.setListener(this);
 
+        star_1=findViewById(R.id.star_1);
+        star_2=findViewById(R.id.star_2);
+        star_3=findViewById(R.id.star_3);
+        star_4=findViewById(R.id.star_4);
+        star_5=findViewById(R.id.star_5);
+
+        star_12=findViewById(R.id.star_12);
+        star_22=findViewById(R.id.star_22);
+        star_32=findViewById(R.id.star_32);
+        star_42=findViewById(R.id.star_42);
+        star_52=findViewById(R.id.star_52);
+
         //TODO add get auth
         String userId="AAy1PoVw27Ed5sdljaiY";
-       // bonusViewModel.ch
+        bonusViewModel.getQuizAndAnswer(quizId, userId);
 
     }
 
     public void commentator1(View view) {
         int id=view.getId();
-
-        switch (id){
-            case R.id.star_1:{
-
-                break;
-            }
-            case R.id.star_2:{
-
-                break;
-            }
-            case R.id.star_3:{
-
-                break;
-            }
-            case R.id.star_4:{
-
-                break;
-            }
-            case R.id.star_5:{
-
-                break;
+        if(!commentator_one) {
+            commentator_one=true;
+            switch (id) {
+                case R.id.star_1: {
+                    star_1.setImageResource(R.drawable.star_full);
+                    star_2.setImageResource(R.drawable.star_empty);
+                    star_3.setImageResource(R.drawable.star_empty);
+                    star_4.setImageResource(R.drawable.star_empty);
+                    star_5.setImageResource(R.drawable.star_empty);
+                    rateCommentator(1,1);
+                    break;
+                }
+                case R.id.star_2: {
+                    star_1.setImageResource(R.drawable.star_full);
+                    star_2.setImageResource(R.drawable.star_full);
+                    star_3.setImageResource(R.drawable.star_empty);
+                    star_4.setImageResource(R.drawable.star_empty);
+                    star_5.setImageResource(R.drawable.star_empty);
+                    rateCommentator(1,2);
+                    break;
+                }
+                case R.id.star_3: {
+                    star_1.setImageResource(R.drawable.star_full);
+                    star_2.setImageResource(R.drawable.star_full);
+                    star_3.setImageResource(R.drawable.star_full);
+                    star_4.setImageResource(R.drawable.star_empty);
+                    star_5.setImageResource(R.drawable.star_empty);
+                    rateCommentator(1,3);
+                    break;
+                }
+                case R.id.star_4: {
+                    star_1.setImageResource(R.drawable.star_full);
+                    star_2.setImageResource(R.drawable.star_full);
+                    star_3.setImageResource(R.drawable.star_full);
+                    star_4.setImageResource(R.drawable.star_full);
+                    star_5.setImageResource(R.drawable.star_empty);
+                    rateCommentator(1,4);
+                    break;
+                }
+                case R.id.star_5: {
+                    star_1.setImageResource(R.drawable.star_full);
+                    star_2.setImageResource(R.drawable.star_full);
+                    star_3.setImageResource(R.drawable.star_full);
+                    star_4.setImageResource(R.drawable.star_full);
+                    star_5.setImageResource(R.drawable.star_full);
+                    rateCommentator(1,5);
+                    break;
+                }
             }
         }
     }
@@ -92,30 +150,61 @@ public class RatingActivity extends AppCompatActivity implements BonusViewModel.
 
         int id=view.getId();
 
-        switch (id){
-            case R.id.star_12:{
-
-                break;
-            }
-            case R.id.star_22:{
-
-                break;
-            }
-            case R.id.star_32:{
-
-                break;
-            }
-            case R.id.star_42:{
-
-                break;
-            }
-            case R.id.star_52:{
-
-                break;
+        if(!commentator_two) {
+            commentator_two=true;
+            switch (id) {
+                case R.id.star_12: {
+                    star_12.setImageResource(R.drawable.star_full);
+                    star_22.setImageResource(R.drawable.star_empty);
+                    star_32.setImageResource(R.drawable.star_empty);
+                    star_42.setImageResource(R.drawable.star_empty);
+                    star_52.setImageResource(R.drawable.star_empty);
+                    rateCommentator(2,1);
+                    break;
+                }
+                case R.id.star_22: {
+                    star_12.setImageResource(R.drawable.star_full);
+                    star_22.setImageResource(R.drawable.star_full);
+                    star_32.setImageResource(R.drawable.star_empty);
+                    star_42.setImageResource(R.drawable.star_empty);
+                    star_52.setImageResource(R.drawable.star_empty);
+                    rateCommentator(2,2);
+                    break;
+                }
+                case R.id.star_32: {
+                    star_12.setImageResource(R.drawable.star_full);
+                    star_22.setImageResource(R.drawable.star_full);
+                    star_32.setImageResource(R.drawable.star_full);
+                    star_42.setImageResource(R.drawable.star_empty);
+                    star_52.setImageResource(R.drawable.star_empty);
+                    rateCommentator(2,3);
+                    break;
+                }
+                case R.id.star_42: {
+                    star_12.setImageResource(R.drawable.star_full);
+                    star_22.setImageResource(R.drawable.star_full);
+                    star_32.setImageResource(R.drawable.star_full);
+                    star_42.setImageResource(R.drawable.star_full);
+                    star_52.setImageResource(R.drawable.star_empty);
+                    rateCommentator(2,4);
+                    break;
+                }
+                case R.id.star_52: {
+                    star_12.setImageResource(R.drawable.star_full);
+                    star_22.setImageResource(R.drawable.star_full);
+                    star_32.setImageResource(R.drawable.star_full);
+                    star_42.setImageResource(R.drawable.star_full);
+                    star_52.setImageResource(R.drawable.star_full);
+                    rateCommentator(2,5);
+                    break;
+                }
             }
         }
     }
 
+    private void rateCommentator(int order, int grade){
+        //TODO call bonusview.rate with commentatorId and grade
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

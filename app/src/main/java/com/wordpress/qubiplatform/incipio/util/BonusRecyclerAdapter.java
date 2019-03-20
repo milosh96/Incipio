@@ -81,7 +81,7 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
                             v.getContext().startActivity(intent);
                             break;
                         }
-                        case "given":{
+                        case "select":{
                             //sa ponudjenim odgovorima
                             Intent intent=new Intent(v.getContext(),QuizActivity.class);
                             intent.putExtra("QUIZ_ID",quizId);

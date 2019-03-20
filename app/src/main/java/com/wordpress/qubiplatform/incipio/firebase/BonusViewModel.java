@@ -32,14 +32,22 @@ public class BonusViewModel extends AndroidViewModel {
 
     public interface BonusUpdate{
         void setQuiz(List<Quiz> quizzes);
+
     }
 
 
-    public void getQuiz(String gameId, String userId){
+    public void getQuizzes(String gameId, String userId){
         bonusRepository.getQuiz(gameId,userId);
     }
+
+    public void getQuizAndAnswer(String quizId, String userId){
+
+    }
+
 
     public void setQuizzes(List<Quiz> quizzes){
         listener.setQuiz(quizzes);
     }
+
+
 }

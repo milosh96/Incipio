@@ -62,7 +62,7 @@ public class BonusActivity extends AppCompatActivity implements BonusViewModel.B
 
         //TODO add get auth
         String userId="AAy1PoVw27Ed5sdljaiY";
-        bonusViewModel.getQuiz(gameId,userId);
+        bonusViewModel.getQuizzes(gameId,userId);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

@@ -48,6 +48,7 @@
 
     </LinearLayout>
 
+    <!-- old ver 1.0
     <Button
 
         android:background="@color/colorRed"
@@ -63,6 +64,16 @@
         android:text="@string/mail_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+        -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/mail_send"
+        android:padding="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_send_white2"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

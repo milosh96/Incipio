@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -61,7 +62,7 @@ public class DirectMssgActivity extends AppCompatActivity {
         title=findViewById(R.id.mail_title);
         body=findViewById(R.id.mail_body);
 
-        Button send=findViewById(R.id.mail_send);
+        FloatingActionButton send=findViewById(R.id.mail_send);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
