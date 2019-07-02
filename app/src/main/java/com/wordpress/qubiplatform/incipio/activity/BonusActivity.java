@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.BonusViewModel;
 import com.wordpress.qubiplatform.incipio.firebase.entity.Quiz;
@@ -24,6 +26,8 @@ public class BonusActivity extends AppCompatActivity implements BonusViewModel.B
     private BonusViewModel bonusViewModel;
     private RecyclerView bonusRecycle;
     private String gameId="";
+
+    private FirebaseAuth Auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +64,18 @@ public class BonusActivity extends AppCompatActivity implements BonusViewModel.B
         bonusRecycle.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         bonusRecycle.setAdapter(adapter);
 
-        //TODO add get auth
-        String userId="AAy1PoVw27Ed5sdljaiY";
-        bonusViewModel.getQuizzes(gameId,userId);
+        //todo moglo je da se ubaci u viewmodel
+        Auth=FirebaseAuth.getInstance();
+
+        //add get auth
+        final FirebaseUser currentUser = Auth.getCurrentUser();
+        if(currentUser!=null) {
+            String userId = currentUser.getUid();
+            bonusViewModel.getQuizzes(gameId, userId);
+        }
+        else{
+            //TODO empty list
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -92,5 +105,25 @@ public class BonusActivity extends AppCompatActivity implements BonusViewModel.B
     @Override
     public void setQuiz(List<Quiz> quizzes) {
         adapter.setQuiz(quizzes);
+    }
+
+    @Override
+    public void setQReplySimp(Quiz quiz, String reply) {
+        //empty
+    }
+
+    @Override
+    public void setQReplySel(Quiz quiz, int reply) {
+        //empty
+    }
+
+    @Override
+    public void setQReplyRat(Quiz quiz, int star1, int star2) {
+        //empty
+    }
+
+    @Override
+    public void setNoReply(Quiz quiz) {
+        //empty
     }
 }

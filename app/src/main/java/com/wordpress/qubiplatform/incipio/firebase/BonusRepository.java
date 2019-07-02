@@ -99,4 +99,113 @@ public class BonusRepository {
             }
         });
     }
+
+    public void getQReply(final String quizId, final String userId){
+        DatabaseReference myRef=firebaseDatabase.getReference("quiz");
+
+        myRef.child(quizId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(log_tag,"Quiz with id "+quizId+" found.");
+
+                Log.d("FIREBASE","Before quiz");
+                Quiz quiz=dataSnapshot.getValue(Quiz.class);
+                Log.d("FIREBASE","After quiz");
+                quiz.setId(quizId);
+
+                findQReply(quiz,userId);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //empty
+                Log.d(log_tag,"Database error "+databaseError.toString());
+            }
+        });
+    }
+
+    private void findQReply(final Quiz quiz, String userId){
+        DatabaseReference myRef=firebaseDatabase.getReference("quizReply");
+
+        myRef.orderByChild("idUser").equalTo(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int type=0;
+                int reply=0;
+                String answer="";
+                int star1=1;
+                int star2=1;
+                for (DataSnapshot oneQuiz:dataSnapshot.getChildren()){
+                    //key value parovi
+                    String id=oneQuiz.getKey();
+                    QuizReply quizReply=oneQuiz.getValue(QuizReply.class);
+                    quizReply.setId(id);
+
+                    if(quiz.getId().equals(quizReply.getIdQuiz())){
+                        //nadjen odgovor
+                        switch (quiz.getType()){
+                            case "select":{
+
+                                reply=Integer.parseInt(quizReply.getReply());
+                                type=1;
+                                break;
+                            }
+                            case "simple":{
+
+                                answer=quizReply.getReply();
+                                type=2;
+                                break;
+                            }
+                            case "rating":{
+                                //moglo je malo lepse
+                                String[] comm=quizReply.getReply().split(":");
+                                star1=Integer.parseInt(comm[0]);
+                                star2=Integer.parseInt(comm[1]);
+                                type=3;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+
+                }
+
+                switch (type){
+                    case 0:{
+                        bonusViewModel.setNoReply(quiz);
+                        break;
+                    }
+                    case 1:{
+                        //select
+                        bonusViewModel.setQReplySel(quiz,reply);
+                        break;
+                    }
+                    case 2:{
+                        //simple
+                        bonusViewModel.setQReplySimp(quiz,answer);
+                        break;
+                    }
+                    case 3:{
+                        //rat
+                        bonusViewModel.setQReplyRat(quiz,star1,star2);
+                        break;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(log_tag,"Database error "+databaseError.toString());
+            }
+        });
+    }
+
+
+    public void addReply(String quizId, String userId, String reply){
+        DatabaseReference myRef=firebaseDatabase.getReference("quizReply");
+
+        //todo smisliti cemu sluzi status
+        myRef.push().setValue(new QuizReply(quizId,userId,reply,"zabelezeno"));
+    }
 }

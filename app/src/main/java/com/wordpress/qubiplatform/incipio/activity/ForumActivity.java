@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.entity.Chat;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
@@ -35,6 +37,8 @@ public class ForumActivity extends AppCompatActivity implements FBViewModel.Data
     //recycler
     private RecyclerView myRecyclerView;
     private ForumRecyclerAdapter adapter;
+
+    private FirebaseAuth Auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class ForumActivity extends AppCompatActivity implements FBViewModel.Data
 
         chatMssg=findViewById(R.id.chat_mssg);
         send=findViewById(R.id.chat_btn);
+        Auth=FirebaseAuth.getInstance();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +81,22 @@ public class ForumActivity extends AppCompatActivity implements FBViewModel.Data
                 //formiranje intenta i slanje poruke(uspesan toast)
 
                 String poruka=chatMssg.getText().toString();
+                final FirebaseUser currentUser = Auth.getCurrentUser();
+                if(currentUser!=null) {
+                    String userId = currentUser.getUid();
+                    //TODO get with auth
 
-                String userId="";
-                //TODO get with auth
+                    if (poruka.trim().equals("")) {
+                        Toast.makeText(v.getContext(), "Telo poruke je obavezno.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
 
-                if(poruka.trim().equals("")){
-                    Toast.makeText(v.getContext(),"Telo poruke je obavezno.",Toast.LENGTH_LONG).show();
-                    return;
+                    fbViewModel.sendChat(gameId, userId, poruka);
+                    chatMssg.setText("");
                 }
-
-                fbViewModel.sendChat(gameId,userId,poruka);
-                chatMssg.setText("");
+                else{
+                    Toast.makeText(v.getContext(), "Problem sa autentikacijom korisnika.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

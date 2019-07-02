@@ -52,8 +52,9 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
         private TextView order;
         private String quizId="";
         private String type="";
+        private int position;
 
-        public QuizHolder(View itemView) {
+        public QuizHolder(final View itemView) {
 
             super(itemView);
             leftBanner=itemView.findViewById(R.id.quiz_start);
@@ -71,6 +72,7 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
                             //commentaators and stars to select
                             Intent intent=new Intent(v.getContext(),RatingActivity.class);
                             intent.putExtra("QUIZ_ID",quizId);
+                            intent.putExtra("ORDER",getPos());
                             v.getContext().startActivity(intent);
                             break;
                         }
@@ -78,6 +80,7 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
                             //just text field for input
                             Intent intent=new Intent(v.getContext(),SimpleActivity.class);
                             intent.putExtra("QUIZ_ID",quizId);
+                            intent.putExtra("ORDER",getPos());
                             v.getContext().startActivity(intent);
                             break;
                         }
@@ -85,6 +88,7 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
                             //sa ponudjenim odgovorima
                             Intent intent=new Intent(v.getContext(),QuizActivity.class);
                             intent.putExtra("QUIZ_ID",quizId);
+                            intent.putExtra("ORDER",getPos());
                             v.getContext().startActivity(intent);
                             break;
                         }
@@ -106,12 +110,16 @@ public class BonusRecyclerAdapter extends RecyclerView.Adapter<BonusRecyclerAdap
                 rightBanner.setBackgroundResource(R.color.colorRed);
             }
 
-            int position=getAdapterPosition()+1;
+            position=getAdapterPosition()+1;
             order.setText(position+".");
             description.setText(quiz.getQuestion());
             quizId=quiz.getId();
             type=quiz.getType();
 
+        }
+
+        public int getPos(){
+            return position;
         }
     }
 }

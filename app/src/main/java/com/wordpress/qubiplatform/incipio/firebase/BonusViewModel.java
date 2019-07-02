@@ -32,7 +32,10 @@ public class BonusViewModel extends AndroidViewModel {
 
     public interface BonusUpdate{
         void setQuiz(List<Quiz> quizzes);
-
+        void setQReplySimp(Quiz quiz, String reply);
+        void setQReplySel(Quiz quiz, int reply);
+        void setQReplyRat(Quiz quiz, int star1, int star2);
+        void setNoReply(Quiz quiz);
     }
 
 
@@ -40,14 +43,28 @@ public class BonusViewModel extends AndroidViewModel {
         bonusRepository.getQuiz(gameId,userId);
     }
 
-    public void getQuizAndAnswer(String quizId, String userId){
 
+    public void getQReply(String quizId, String userId){
+        bonusRepository.getQReply(quizId,userId);
     }
 
+    public void addReply(String quizId, String userId, String reply){
+        bonusRepository.addReply(quizId,userId,reply);
+    }
 
     public void setQuizzes(List<Quiz> quizzes){
         listener.setQuiz(quizzes);
     }
 
+    public void setQReplySimp(Quiz q, String rep){
+        listener.setQReplySimp(q,rep);
+    }
+    public void setQReplySel(Quiz q, int rep){
+        listener.setQReplySel(q,rep);
+    }
+    public void setQReplyRat(Quiz q, int rep1,int rep2){
+        listener.setQReplyRat(q,rep1,rep2);
+    }
+    public void setNoReply(Quiz q){listener.setNoReply(q);};
 
 }

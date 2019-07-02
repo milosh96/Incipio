@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.firebase.FBViewModel;
 
@@ -28,6 +30,7 @@ public class DirectMssgActivity extends AppCompatActivity {
     //polja za unos
     private EditText title;
     private EditText body;
+    private FirebaseAuth Auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,7 @@ public class DirectMssgActivity extends AppCompatActivity {
         body=findViewById(R.id.mail_body);
 
         FloatingActionButton send=findViewById(R.id.mail_send);
+        Auth=FirebaseAuth.getInstance();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,14 +79,21 @@ public class DirectMssgActivity extends AppCompatActivity {
                     return;
                 }
                 //TODO dohvatiti userId?
-                String userId="";
+                final FirebaseUser currentUser = Auth.getCurrentUser();
+                if(currentUser!=null) {
+                    String userId = currentUser.getUid();
 
-                fbViewModel.sendDM(gameId,userId, mssg_title, mssg_body);
+                    fbViewModel.sendDM(gameId, userId, mssg_title, mssg_body);
 
 //                Intent intent=new Intent();
 //                intent.putExtra("success_status","success");
-                setResult(RESULT_OK);
-                finish();
+                    setResult(RESULT_OK);
+                    finish();
+                }
+                else{
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }
             }
         });
     }

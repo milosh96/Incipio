@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SK +</string>
+    <string name="app_name">Incipio</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -70,9 +70,9 @@
 
     <string name="get_custom_token">Get Token</string>
 
-    <string name="sign_in">Sign In</string>
+    <string name="sign_in">Uloguj se</string>
 
-    <string name="create_account">Create Account</string>
+    <string name="create_account">Kreiraj nalog</string>
 
     <string name="send_link">Send Link</string>
 
@@ -82,7 +82,7 @@
 
     <string name="disconnect">Disconnect</string>
 
-    <string name="loading">Loading…</string>
+    <string name="loading">Ucitavanje…</string>
 
     <string name="custom_token">Custom Token</string>
 
@@ -92,9 +92,9 @@
 
     <string name="token_null">Token: null</string>
 
-    <string name="hint_email">Email</string>
+    <string name="hint_email">Unesite e-mail adresu</string>
 
-    <string name="hint_password">Password</string>
+    <string name="hint_password">Unesite sifru</string>
 
     <string name="desc_firebase_lockup">Firebase logo and name</string>
 
@@ -178,5 +178,10 @@
     <string name="options_dislike">Ne svidja mi se</string>
     <string name="options_reply">Odgovori</string>
     <string name="options_profile">Pogledaj profil</string>
+
+
+    <!--from FB website-->
+    <string name="facebook_app_id">2652453971463966</string>
+    <string name="fb_login_protocol_scheme">fb2652453971463966</string>
 
 </resources>

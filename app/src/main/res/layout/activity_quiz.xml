@@ -40,12 +40,11 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="20dp">
         <TextView
+            android:id="@+id/text_answer1"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:background="@color/colorRed"
-            android:textColor="@color/colorPrimary"
             android:text="a) Kobe Bryant"
             android:textSize="18dp"
             android:layout_width="match_parent"
@@ -65,11 +64,11 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="2dp">
         <TextView
+            android:id="@+id/text_answer2"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:background="@color/colorGrey"
             android:text="b) Michael Jordan"
             android:textSize="18dp"
             android:layout_width="match_parent"
@@ -89,12 +88,11 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="2dp">
         <TextView
-            android:background="@color/colorGreen"
+            android:id="@+id/text_answer3"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textColor="@color/colorPrimary"
             android:text="c) Devin Booker"
             android:textSize="18dp"
             android:layout_width="match_parent"
@@ -114,6 +112,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="2dp">
         <TextView
+            android:id="@+id/text_answer4"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="10dp"

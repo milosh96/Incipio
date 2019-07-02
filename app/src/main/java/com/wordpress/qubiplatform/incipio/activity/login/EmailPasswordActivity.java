@@ -10,13 +10,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthCredential;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wordpress.qubiplatform.incipio.R;
 import com.wordpress.qubiplatform.incipio.activity.ConnectionActivity;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 /**
  * Created by Veljko on 10.4.2018..
@@ -24,12 +38,16 @@ import com.wordpress.qubiplatform.incipio.activity.ConnectionActivity;
 
 public class EmailPasswordActivity extends BaseActivity implements View.OnClickListener{
 
+    public static final String TAG="FB_LOGIN";
+
     private TextView statusTW;
     private TextView detailTW;
     private EditText emailField;
     private EditText passwordField;
 
     private FirebaseAuth Auth;
+    private LoginButton fbLogin;
+    private CallbackManager callbackManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,10 +62,34 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
         findViewById(R.id.emailSignInButton).setOnClickListener(this);
         findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
-        findViewById(R.id.signOutButton).setOnClickListener(this);
-        findViewById(R.id.verifyEmailB).setOnClickListener(this);
+//        findViewById(R.id.signOutButton).setOnClickListener(this);
+//        findViewById(R.id.verifyEmailB).setOnClickListener(this);
 
         Auth = FirebaseAuth.getInstance();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        fbLogin=findViewById(R.id.fb_login_button);
+        callbackManager=CallbackManager.Factory.create();
+        fbLogin.setReadPermissions(Arrays.asList("email"));
+
+        fbLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d("FBLOGIN","Succes with FB");
+                createFBCredential(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d("FBLOGIN","User canceled FB login");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d("FBLOGIN","Error with FB Login!!!\n"+error.toString());
+                Toast.makeText(getApplicationContext(),"Greska u komunikaciji sa serverom.",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -60,6 +102,12 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
     private void createAccount(String email, String password) {
 
+        Intent intent=new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+
+
+        /*
+        //Promena novi intent
         Log.d("EmailPassword", "createAccount: " + email);
         if (!validateForm()) {
             return;
@@ -85,6 +133,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                 hideProgressDialog();
             }
         });
+        */
     }
 
     private void signIn(String email, String password) {
@@ -99,23 +148,31 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        hideProgressDialog();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("EmailPassword", "signInWithEmail:success");
                             FirebaseUser user = Auth.getCurrentUser();
+                            //new intent connection activity
                             updateUI(user);
+                            try {
+                                Thread.sleep(1800);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            openHome();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("EmailPassword", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmailPasswordActivity.this, "Greska pri autentifikaciji.",
+                                    Toast.LENGTH_LONG).show();
                             updateUI(null);
                         }
 
                         // [START_EXCLUDE]
-                        if (!task.isSuccessful()) {
-                            statusTW.setText(R.string.auth_failed);
-                        }
+//                        if (!task.isSuccessful()) {
+//                            statusTW.setText(R.string.auth_failed);
+//                        }
                         hideProgressDialog();
                         // [END_EXCLUDE]
                     }
@@ -128,6 +185,13 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         updateUI(null);
     }
 
+    private void openHome(){
+        Intent intent=new Intent(this, ConnectionActivity.class);
+        startActivity(intent);
+    }
+
+
+    /*
     private void sendEmailVerification() {
         // Disable button
         findViewById(R.id.verifyEmailB).setEnabled(false);
@@ -158,10 +222,13 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                 });
         // [END send_email_verification]
     }
+*/
+
 
     private void updateUI(FirebaseUser user) {
 
         hideProgressDialog();
+        /*
         if (user != null) {
             statusTW.setText(getString(R.string.emailpassword_status_fmt,
                     user.getEmail(), user.isEmailVerified()));
@@ -181,7 +248,9 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
             findViewById(R.id.emailPasswordFields).setVisibility(View.VISIBLE);
             findViewById(R.id.signedInButtons).setVisibility(View.GONE);
         }
+        */
     }
+
 
     private boolean validateForm() {
 
@@ -189,7 +258,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
         String email = emailField.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            emailField.setError("Required.");
+            emailField.setError("Obavezno polje.");
             valid = false;
         } else {
             emailField.setError(null);
@@ -197,7 +266,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
 
         String password = passwordField.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            passwordField.setError("Required.");
+            passwordField.setError("Obavezno polje.");
             valid = false;
         } else {
             passwordField.setError(null);
@@ -214,10 +283,33 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
             createAccount(emailField.getText().toString(), passwordField.getText().toString());
         } else if (i == R.id.emailSignInButton) {
             signIn(emailField.getText().toString(), passwordField.getText().toString());
-        } else if (i == R.id.signOutButton) {
-            signOut();
-        } else if (i == R.id.verifyEmailB) {
-            sendEmailVerification();
         }
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void createFBCredential(AccessToken accessToken) {
+        AuthCredential credential=FacebookAuthProvider.getCredential(accessToken.getToken());
+        Log.d("FBLOGIN","Creating token!!!");
+        Auth.signInWithCredential(credential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("FBLOGIN","Task status: "+task.toString());
+                        if(task.isComplete()){
+                            Intent intent=new Intent(getApplicationContext(),ConnectionActivity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Greska sa facebook login tokenom",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+    
 }

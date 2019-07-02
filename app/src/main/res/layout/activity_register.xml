@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".activity.login.RegisterActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:text="Pravljenje naloga"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/regIme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Ime"
+        android:textSize="18dp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/regPrezime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Prezime"
+        android:textSize="18dp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/regMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="E-mail adresa"
+        android:inputType="textEmailAddress"
+        android:textSize="18dp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/regPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Sifra"
+        android:inputType="textPassword"
+        android:textSize="18dp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/regPass2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Ponovi sifru"
+        android:inputType="textPassword"
+        android:textSize="18dp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/regBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_btn"
+        android:onClick="register"
+        android:padding="14dp"
+        android:text="Registruj se"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:theme="@style/ThemeOverlay.MyDarkButton" />
+
+</LinearLayout>
